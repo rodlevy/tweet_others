@@ -1,1 +1,1 @@
-web: bundle exec this start -p $PORT
+web: bundle exec thin start -p $PORT
