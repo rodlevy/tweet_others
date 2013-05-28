@@ -1,9 +1,11 @@
+require 'debugger'
+
 get '/' do
   erb :index
 end
 
 get '/sign_in' do
-  # the `request_token` method is defined in `app/helpers/oauth.rb`
+  # the `request_token` method is defined in              `app/helpers/oauth.rb`
   redirect request_token.authorize_url
 end
 
@@ -18,6 +20,9 @@ get '/auth' do
   # our request token is only valid until we use it to get an access token, so let's delete it from our session
   session.delete(:request_token)
 
+  User.find_or_create_by_username_and_oauth_token_and_oauth_secret(:username => @access_token.params[:screen_name],
+                                                                   :oauth_token  => @access_token.token,
+                                                                   :oauth_secret => @access_token.secret)
   # at this point in the code is where you'll need to create your user account and store the access token
 
   erb :index
