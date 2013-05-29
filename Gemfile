@@ -19,6 +19,8 @@ gem 'debugger'
 gem 'oauth'
 gem 'twitter'
 gem 'rspec'
+gem 'sidekiq'
+gem 'redis'
 
 group :test do
   gem 'faker'
